@@ -1,0 +1,51 @@
+---
+import Topbar from "../components/Organisms/Topbar.astro";
+import ProjectsCard from "../components/Organisms/ProjectsCard.astro";
+import Footer from "../components/Organisms/Footer.astro";
+import Layout from "../layouts/Layout.astro";
+import BannerHero from "../components/Organisms/BannerHero.astro";
+
+import inkfernoImage from '../assets/projects/inkferno.png';
+import inkvasionImage from '../assets/projects/inkvasion-z.png';
+import chileRPImage from '../assets/projects/chile-rp.png';
+import minecraftIcon from '../assets/icons/minecraft.png';
+import robloxIcon from '../assets/icons/roblox.png';
+
+const projects = [
+    {
+        title: 'Republica de Chile RP',
+        description: 'Roleplay',
+        tags: 'Roblox Server',
+        image: chileRPImage.src,  // ✅ Usar .src
+        platform: 'roblox',
+        platformIcon: robloxIcon.src,  // ✅ Pasar el icon directamente
+        href: '/projects'
+    },
+    {
+        title: 'Inkvasion Z',
+        description: 'Survival, Action, Strategy',
+        tags: 'Minecraft Serie',
+        image: inkvasionImage.src,  // ✅ Usar .src
+        platform: 'minecraft',
+        platformIcon: minecraftIcon.src,  // ✅ Pasar el icon directamente
+        href: '/projects'
+    },
+    {
+        title: 'Inkferno',
+        description: 'Survival Hardcore, Action, Strategy',
+        tags: 'Minecraft Serie',
+        image: inkfernoImage.src,
+        platform: 'minecraft',
+        platformIcon: minecraftIcon.src,
+        href: '/projects'
+    }
+];
+
+---
+
+<Layout title="Ukumari Studio - Gamers for Gamers">
+    <Topbar />
+    <ProjectsCard projects={projects}/>
+
+    <Footer />
+</Layout>

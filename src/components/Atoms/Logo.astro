@@ -1,0 +1,52 @@
+---
+import type { ImageMetadata } from 'astro';
+interface Props {
+    text?: string;
+    href?: string;
+    icon?: ImageMetadata;
+    size?: number | string;
+    class?: string;
+}
+
+const {
+    text = 'Ukumari Studio',
+    href = '/',
+    icon,
+    size = '1.5rem',
+    class: className = ''
+} = Astro.props;
+---
+
+<a href={href} class={`logo ${className}`}>
+    {icon && (
+            <img src={icon.src} alt={`${text} logo`} class="logo-icon" />
+    )}
+    <span class="logo-text">{text}</span>
+</a>
+
+<style>
+    .logo {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        text-decoration: none;
+        color: inherit;
+        font-weight: 600;
+        font-size: var(--logo-size, 1.125rem);
+        transition: opacity 0.2s ease;
+    }
+
+    .logo:hover {
+        opacity: 0.8;
+        cursor: pointer;
+    }
+
+    .logo-icon {
+        height: 1.5em;
+        width: auto;
+    }
+
+    .logo-text {
+        white-space: nowrap;
+    }
+</style>

@@ -1,0 +1,115 @@
+---
+import Card from '../Molecules/Card.astro';
+
+interface Project {
+    title: string;
+    description: string;
+    tags: string;
+    image: string;
+    platform: string;
+    platformIcon: string;
+    href?: string;
+}
+
+interface Props {
+    title?: string;
+    projects?: Project[];
+    class?: string;
+}
+
+const {
+    title = 'Discover our projects',
+    projects = [],
+    class: className = ''
+} = Astro.props;
+---
+
+<section class={`projects-section ${className}`}>
+    <div class="container">
+        <h2 class="section-title">{title}</h2>
+
+        {projects.length > 0 ? (
+                <div class="projects-grid">
+                    {projects.map(project => (
+                            <Card {...project} />
+                    ))}
+                </div>
+        ) : (
+                <p class="no-projects">No projects available yet.</p>
+        )}
+    </div>
+</section>
+
+<style>
+    .projects-section {
+        padding: 5rem 2rem;
+        background: linear-gradient(
+                180deg,
+                #000000 0%,
+                #0a0a0a 50%,
+                #000000 100%
+        );
+        position: relative;
+    }
+
+    .projects-section::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-image:
+                radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.05) 0%, transparent 50%);
+        pointer-events: none;
+    }
+
+    .container {
+        position: relative;
+        z-index: 1;
+    }
+
+    .section-title {
+        font-size: clamp(2.5rem, 6vw, 3.5rem);
+        font-weight: 700;
+        text-align: center;
+        margin: 0 0 4rem 0;
+        color: #ffffff;
+        letter-spacing: -0.02em;
+    }
+
+    .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 2.5rem;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .no-projects {
+        text-align: center;
+        color: rgba(255, 255, 255, 0.4);
+        font-size: 1.125rem;
+        padding: 3rem;
+    }
+
+    @media (max-width: 768px) {
+        .projects-section {
+            padding: 3rem 1rem;
+        }
+
+        .section-title {
+            margin-bottom: 2.5rem;
+            font-size: 2rem;
+        }
+
+        .projects-grid {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+    }
+
+    @media (min-width: 769px) and (max-width: 1024px) {
+        .projects-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+</style>

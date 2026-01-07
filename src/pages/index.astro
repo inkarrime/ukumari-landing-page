@@ -1,11 +1,89 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import Topbar from '../components/Organisms/Topbar.astro';
+import BannerHero from '../components/Organisms/BannerHero.astro';
+import ProjectsCard from "../components/Organisms/ProjectsCard.astro";
+import CTASection from '../components/Organisms/CTASection.astro';
+import CollaboratorsSection from '../components/Organisms/CollaboratorsSection.astro';
+import Footer from '../components/Organisms/Footer.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+
+import inkfernoImage from '../assets/projects/inkferno.png';
+import inkvasionImage from '../assets/projects/inkvasion-z.png';
+import chileRPImage from '../assets/projects/chile-rp.png';
+import minecraftIcon from '../assets/icons/minecraft.png';
+import robloxIcon from '../assets/icons/roblox.png';
+import inkarriPhoto from '../assets/collaborators/inkarri.png';
+import mozillaPhoto from '../assets/collaborators/mozilla.png';
+
+const projects = [
+	{
+		title: 'Republica de Chile RP',
+		description: 'Roleplay',
+		tags: 'Roblox Server',
+		image: chileRPImage.src,  // ✅ Usar .src
+		platform: 'roblox',
+		platformIcon: robloxIcon.src,  // ✅ Pasar el icon directamente
+		href: '/projects'
+	},
+	{
+		title: 'Inkvasion Z',
+		description: 'Survival, Action, Strategy',
+		tags: 'Minecraft Serie',
+		image: inkvasionImage.src,  // ✅ Usar .src
+		platform: 'minecraft',
+		platformIcon: minecraftIcon.src,  // ✅ Pasar el icon directamente
+		href: '/projects'
+	},
+	{
+		title: 'Inkferno',
+		description: 'Survival Hardcore, Action, Strategy',
+		tags: 'Minecraft Serie',
+		image: inkfernoImage.src,
+		platform: 'minecraft',
+		platformIcon: minecraftIcon.src,
+		href: '/projects'
+	}
+];
+
+const collaborators = [
+	{
+		name: 'inkarri',
+		role: 'Kick Streamer',
+		image: inkarriPhoto.src,
+		href: 'https://kick.com/inkarri'
+	},
+	{
+		name: 'Mozilla',
+		role: 'Kick Streamer',
+		image: mozillaPhoto.src,
+		href: 'https://kick.com/mozilla'
+	}
+];
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Ukumari Studio - Gamers for Gamers">
+	<Topbar />
+
+	<BannerHero
+		title="Ukumari Studio"
+		subtitle="Gamers for Gamers"
+		ctaLink="https://discord.gg/zwsPkndbND"
+	/>
+
+	<ProjectsCard projects={projects}/>
+
+	<CTASection
+		title="We help you create your Minecraft Series"
+		description="We are a game development studio focused on Minecraft."
+		ctaText="Join our Discord"
+		ctaLink="https://discord.gg/zwsPkndbND"
+	/>
+
+	<CollaboratorsSection
+		title="Our Collaborators"
+		collaborators={collaborators}
+	/>
+
+	<Footer />
 </Layout>

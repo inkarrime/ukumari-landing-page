@@ -1,0 +1,34 @@
+---
+import IconLink from './IconLink.astro';
+
+interface Props {
+    class?: string;
+}
+
+const { class: className = '' } = Astro.props;
+
+const socialNetworks = [
+    { icon: 'twitter', href: 'https://twitter.com/ukumaristudios', label: 'Twitter' },
+    { icon: 'instagram', href: 'https://instagram.com/ukumaristudios', label: 'Instagram' },
+    { icon: 'youtube', href: 'https://youtube.com/@ukumaristudios', label: 'YouTube' }
+];
+---
+
+<div class={`social-links ${className}`}>
+    {socialNetworks.map(social => (
+            <IconLink
+                    icon={social.icon}
+                    href={social.href}
+                    size="1.25em"
+                    ariaLabel={social.label}
+            />
+    ))}
+</div>
+
+<style>
+    .social-links {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+    }
+</style>

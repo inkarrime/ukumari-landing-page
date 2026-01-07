@@ -1,0 +1,49 @@
+---
+import Icon from '../Atoms/Icon.astro';
+
+interface Props {
+    icon: string;
+    href: string;
+    size?: number | string;
+    class?: string;
+    iconClass?: string;
+    target?: '_blank' | '_self' | '_parent' | '_top';
+    rel?: string;
+    ariaLabel?: string;
+}
+
+const {
+    icon,
+    href,
+    size = '1.25em',
+    class: className = '',
+    iconClass = '',
+    target = '_blank',
+    rel = 'noopener noreferrer',
+    ariaLabel
+} = Astro.props;
+---
+
+<a
+        href={href}
+        target={target}
+        rel={target === '_blank' ? rel : undefined}
+        class={`icon-link ${className}`}
+        aria-label={ariaLabel || `${icon} link`}
+>
+    <Icon icon={icon} size={size} class={iconClass} />
+</a>
+
+<style>
+    .icon-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition: opacity 0.2s ease;
+        text-decoration: none;
+    }
+
+    .icon-link:hover {
+        opacity: 0.7;
+    }
+</style>

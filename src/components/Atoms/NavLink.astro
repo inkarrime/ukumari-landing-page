@@ -1,0 +1,51 @@
+---
+interface Props {
+    href: string;
+    class?: string;
+    active?: boolean;
+}
+
+const { href, class: className = '', active = false } = Astro.props;
+
+// Detectar si la ruta está activa
+const currentPath = Astro.url.pathname;
+const isActive = active || currentPath === href || currentPath.startsWith(href + '/');
+---
+
+<a
+        href={href}
+        class={`nav-link ${isActive ? 'active' : ''} ${className}`}
+        aria-current={isActive ? 'page' : undefined}
+>
+    <slot />
+</a>
+
+<style>
+    .nav-link {
+        text-decoration: none;
+        color: inherit;
+        font-size: 0.9375rem;
+        font-weight: 400;
+        transition: opacity 0.2s ease;
+        position: relative;
+    }
+
+    .nav-link:hover {
+        opacity: 0.7;
+    }
+
+    .nav-link.active {
+        font-weight: 500;
+    }
+
+    /* Opcional: underline effect */
+    .nav-link.active::after {
+        content: '';
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: currentColor;
+    }
+</style>

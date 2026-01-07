@@ -1,0 +1,24 @@
+---
+import NavLink from '../Atoms/NavLink.astro';
+
+interface Props {
+    items: Array<{ label: string; href: string }>;
+}
+
+const { items } = Astro.props;
+---
+
+<nav class="nav-menu">
+    {items.map(item => (
+            <NavLink href={item.href}>
+                {item.label}
+            </NavLink>
+    ))}
+</nav>
+
+<style>
+    .nav-menu {
+        display: flex;
+        gap: 2rem;
+    }
+</style>

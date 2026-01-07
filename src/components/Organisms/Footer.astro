@@ -1,0 +1,57 @@
+---
+import SocialLinks from '../Molecules/SocialLinks.astro';
+import NavMenu from '../Molecules/NavMenu.astro';
+
+interface Props {
+    class?: string;
+}
+
+const { class: className = '' } = Astro.props;
+
+const footerLinks = [
+    { label: 'About', href: '/about' },
+    { label: 'Contact', href: '/contact' },
+    { label: 'Privacy', href: '/privacy' }
+];
+---
+
+<footer class={`footer ${className}`}>
+    <div class="footer-content">
+        <!-- Sección de Links (si la agregas) -->
+        <!-- <NavMenu items={footerLinks} /> -->
+
+        <SocialLinks class="footer-social" />
+
+        <p class="copyright">
+            © {new Date().getFullYear()} Ukumari Studios
+        </p>
+    </div>
+</footer>
+
+<style>
+    .footer {
+        background: #000;
+        color: #fff;
+        padding: 2rem 1rem;
+    }
+
+    .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    .footer-social {
+        order: 1;
+    }
+
+    .copyright {
+        font-size: 0.875rem;
+        margin: 0;
+        opacity: 0.8;
+        order: 2;
+    }
+</style>

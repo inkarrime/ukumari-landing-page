@@ -1,0 +1,48 @@
+---
+import iconMap from '../../assets/icons/icons.json';
+
+interface Props {
+    icon: string;
+    size?: number | string;
+    class?: string;
+}
+
+const {
+    icon,
+    size = '1.25em',
+    class: className = ''
+} = Astro.props;
+
+const iconData = iconMap[icon as keyof typeof iconMap];
+
+if (!iconData) {
+    console.warn(`Icon "${icon}" not found in icons.json`);
+}
+
+const sizeValue = typeof size === 'number' ? `${size}px` : size;
+---
+
+{iconData ? (
+<svg
+        width={sizeValue}
+        height={sizeValue}
+        viewBox={iconData.viewBox}
+        fill="currentColor"
+        xmlns="http://www.w3.org/2000/svg"
+        class={className}
+>
+    <path d={iconData.path}></path>
+</svg>
+    ) : (
+<svg
+        width={sizeValue}
+        height={sizeValue}
+        viewBox="0 0 24 24"
+        fill="currentColor"
+        xmlns="http://www.w3.org/2000/svg"
+        class={className}
+        title={`Icon "${icon}" not found`}
+>
+    <text x="12" y="16" text-anchor="middle" font-size="16">⚠️</text>
+</svg>
+    )}

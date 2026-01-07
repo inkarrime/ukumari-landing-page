@@ -1,0 +1,113 @@
+---
+interface Props {
+    name: string;
+    role: string;
+    image?: string;
+    href?: string;
+    class?: string;
+}
+
+const {
+    name,
+    role,
+    image,
+    href,
+    class: className = ''
+} = Astro.props;
+
+const Card = href ? 'a' : 'div';
+---
+
+<Card
+        href={href}
+        target={href ? '_blank' : undefined}
+        rel={href ? 'noopener noreferrer' : undefined}
+        class={`collaborator-card ${className}`}
+>
+    <div class="collaborator-image">
+        {image ? (
+                <img src={image} alt={name} />
+        ) : (
+                <div class="placeholder">
+                    <div class="placeholder-icon">?</div>
+                </div>
+        )}
+    </div>
+    <div class="collaborator-info">
+        <h4 class="collaborator-name">{name}</h4>
+        <p class="collaborator-role">{role}</p>
+    </div>
+</Card>
+
+<style>
+    .collaborator-card {
+        background: rgba(0, 0, 0, 0.6);
+        border-radius: 0.5rem;
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        text-decoration: none;
+        color: inherit;
+        display: flex;
+        flex-direction: column;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        grid-column: span 2;
+    }
+
+    .collaborator-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+        border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .collaborator-image {
+        aspect-ratio: 1;
+        background: #1a1a1a;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .collaborator-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.4s ease;
+    }
+
+    .collaborator-card:hover .collaborator-image img {
+        transform: scale(1.1);
+    }
+
+    .placeholder {
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .placeholder-icon {
+        font-size: 3rem;
+        color: rgba(255, 255, 255, 0.2);
+        font-weight: 300;
+    }
+
+    .collaborator-info {
+        padding: 1.25rem;
+        text-align: center;
+        background: rgba(0, 0, 0, 0.4);
+    }
+
+    .collaborator-name {
+        font-size: 1.125rem;
+        font-weight: 600;
+        margin: 0 0 0.375rem 0;
+        color: #ffffff;
+    }
+
+    .collaborator-role {
+        font-size: 0.875rem;
+        color: rgba(255, 255, 255, 0.6);
+        margin: 0;
+    }
+</style>
